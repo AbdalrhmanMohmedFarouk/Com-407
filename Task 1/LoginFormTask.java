@@ -65,6 +65,7 @@ public class LoginFormTask extends Frame {
 
     // List of registered users
     private User[] users;
+    private int failedAttempts = 0;
 
     public LoginFormTask() {
         super("Login");
@@ -131,18 +132,35 @@ public class LoginFormTask extends Frame {
                 dispose();
                 new WelcomePage(found);
             } else {
-                new Dialog(this, "Error", true) {
-                    {
-                        setLayout(new FlowLayout());
-                        add(new Label("Invalid username, password, or role."));
-                        Button ok = new Button("OK");
-                        ok.addActionListener(ev -> dispose());
-                        add(ok);
-                        setSize(300, 100);
-                        setLocationRelativeTo(null);
-                        setVisible(true);
-                    }
-                };
+                failedAttempts++;
+                if (failedAttempts >= 3) {
+                    login.setVisible(false);
+                    new Dialog(this, "Error", true) {
+                        {
+                            setLayout(new FlowLayout());
+                            add(new Label("Too many failed attempts. Login disabled."));
+                            Button ok = new Button("OK");
+                            ok.addActionListener(ev -> dispose());
+                            add(ok);
+                            setSize(350, 100);
+                            setLocationRelativeTo(null);
+                            setVisible(true);
+                        }
+                    };
+                } else {
+                    new Dialog(this, "Error", true) {
+                        {
+                            setLayout(new FlowLayout());
+                            add(new Label("Invalid username, password, or role."));
+                            Button ok = new Button("OK");
+                            ok.addActionListener(ev -> dispose());
+                            add(ok);
+                            setSize(300, 100);
+                            setLocationRelativeTo(null);
+                            setVisible(true);
+                        }
+                    };
+                }
             }
         });
 
