@@ -111,16 +111,18 @@ public class LoginFormTask extends Frame {
             String selectedRole = role.getSelectedItem();
 
             if (uname.isEmpty() || pass.isEmpty()) {
-                new Dialog(this, "Error", true) {{
-                    setLayout(new FlowLayout());
-                    add(new Label("Please fill in all fields."));
-                    Button ok = new Button("OK");
-                    ok.addActionListener(ev -> dispose());
-                    add(ok);
-                    setSize(250, 100);
-                    setLocationRelativeTo(null);
-                    setVisible(true);
-                }};
+                new Dialog(this, "Error", true) {
+                    {
+                        setLayout(new FlowLayout());
+                        add(new Label("Please fill in all fields."));
+                        Button ok = new Button("OK");
+                        ok.addActionListener(ev -> dispose());
+                        add(ok);
+                        setSize(250, 100);
+                        setLocationRelativeTo(null);
+                        setVisible(true);
+                    }
+                };
                 return;
             }
 
@@ -129,16 +131,18 @@ public class LoginFormTask extends Frame {
                 dispose();
                 new WelcomePage(found);
             } else {
-                new Dialog(this, "Error", true) {{
-                    setLayout(new FlowLayout());
-                    add(new Label("Invalid username, password, or role."));
-                    Button ok = new Button("OK");
-                    ok.addActionListener(ev -> dispose());
-                    add(ok);
-                    setSize(300, 100);
-                    setLocationRelativeTo(null);
-                    setVisible(true);
-                }};
+                new Dialog(this, "Error", true) {
+                    {
+                        setLayout(new FlowLayout());
+                        add(new Label("Invalid username, password, or role."));
+                        Button ok = new Button("OK");
+                        ok.addActionListener(ev -> dispose());
+                        add(ok);
+                        setSize(300, 100);
+                        setLocationRelativeTo(null);
+                        setVisible(true);
+                    }
+                };
             }
         });
 
@@ -159,9 +163,9 @@ public class LoginFormTask extends Frame {
 
     private void loadUsers() {
         users = new User[] {
-            new User("alice",   "pass123", "Student"),
-            new User("bob",     "pass456", "TA"),
-            new User("charlie", "pass789", "Professor")
+                new User("Abdalrhman", "pass123", "Student"),
+                new User("Mohmed", "pass456", "TA"),
+                new User("Farouk", "pass789", "Professor")
         };
     }
 
